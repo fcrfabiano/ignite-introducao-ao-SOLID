@@ -8,11 +8,12 @@ class ListAllUsersController {
   handle(request: Request, response: Response): Response {
     try {
       const { user_id } = request.headers;
+
       const all = this.listAllUsersUseCase.execute({ user_id });
 
       return response.json(all);
     } catch (err) {
-      return response.json({ error: err.message });
+      return response.status(400).json({ error: err.message });
     }
   }
 }
